@@ -1,23 +1,15 @@
 .catalog {
 
   display: grid;
-  --catalog-columns: 1;
   gap: 48px;
-  grid-template-columns: repeat(var(--catalog-columns),$card-width);
   justify-content: center;
 
-  @media (min-width: 488px) {
-    --catalog-columns: 2;
+  @each $width, $cols in $cols-to-viewport {
+    @media (min-width: $width) {
+      grid-template-columns: repeat($cols, $card-width);
+    }
   }
-
-  @media (min-width: 768px) {
-    --catalog-columns: 3;
-  }
-
-  @media (min-width: 1024px) {
-    --catalog-columns: 4;
-  }
-
+  
   &__card {
     display: flex;
     justify-content: center;
